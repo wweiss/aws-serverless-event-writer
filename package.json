@@ -1,0 +1,28 @@
+{
+  "name": "aws-serverless-event-writer",
+  "version": "1.0.0",
+  "description": "A serverless app that receives and stores events to an S3 bucket.",
+  "main": "index.js",
+  "author": "William Weiss <william@codification.org>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "npm run clean && gulp build",
+    "package": "npm run clean && gulp package"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.1",
+    "@types/node": "^9.6.6",
+    "aws-lambda": "^0.1.2",
+    "aws-sdk": "^2.226.1",
+    "del": "^3.0.0",
+    "dotenv": "^5.0.1",
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-run-command": "0.0.9",
+    "gulp-typescript": "^4.0.2",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
+  }
+}

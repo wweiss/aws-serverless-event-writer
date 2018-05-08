@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  S3Bucket:
+    Type: String
+    Description: Name of the S3 Bucket to write events to.
+  EventKey:
+    Type: String
+    Default: ''
+    Description: (Optional) Fixed key to write events to in the S3 Bucket.
+  EventKeyPrefix:
+    Type: String
+    Default: ''
+    Description: (Optional) If a fixed key is not defined, this prefix will be added to the dynamic key.
+  EventKeySuffix:
+    Type: String
+    Default: ''
+    Description: (Optional) If a fixed key is not defined, this suffix will be appended to the dynamic key.
+  EventContentType:
+    Type: String
+    Default: ''
+    Description: (Optional) Expected content type of events to be written.  Used when writing the event to the S3 Bucket.
+
+Resources:
+  EventWriter:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs8.10
+      CodeUri: ./dist
+      Handler: EventWriterHandler.handler
+      Tracing: Active
+      MemorySize: 512
+      Timeout: 60
+      Environment:
+        Variables:
+          S3_BUCKET: !Ref S3Bucket
+          EVENT_KEY: !Ref EventKey
+          EVENT_KEY_PREFIX: !Ref EventKeyPrefix
+          EVENT_KEY_SUFFIX: !Ref EventKeySuffix
+          EVENT_CONTENT_TYPE: !Ref EventContentType
+      Policies:
+          - S3CrudPolicy:
+              BucketName: !Ref S3Bucket
+
+Outputs:
+  EventWriterFunctionName:
+    Value: !Ref EventWriter
+    Export:
+      Name: !Sub ${AWS::StackName}-EventWriterFunctionName
+  EventWriterFunctionArn:
+    Value: !GetAtt EventWriter.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-EventWriterFunctionArn
