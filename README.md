@@ -6,7 +6,7 @@ This serverless app accepts events and writes the contents to a designated S3 Bu
 
 1. [Create an AWS account](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html) if you do not already have one and login
 
-2. Go to the app's page on the [Serverless Application Repository](https://serverlessrepo.aws.amazon.com/applications) and click "Deploy"
+2. Go to the app's page on the [Serverless Application Repository](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:771389557967:applications~EventWriter) and click "Deploy"
 
 3. Provide the required app parameters
 
