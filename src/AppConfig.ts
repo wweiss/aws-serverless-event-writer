@@ -3,9 +3,7 @@ export class AppConfig {
   private _eventKey = AppConfig.valueOrNull('EVENT_KEY');
   private eventKeyPrefix = AppConfig.valueOrNull('EVENT_KEY_PREFIX');
   private eventKeySuffix = AppConfig.valueOrNull('EVENT_KEY_SUFFIX');
-  public readonly eventContentType = AppConfig.valueOrNull(
-    'EVENT_CONTENT_TYPE'
-  );
+  private _eventContentType = AppConfig.valueOrNull('EVENT_CONTENT_TYPE');
 
   static valueOrNull(key: string): string {
     let rval = process.env[key];
@@ -22,6 +20,14 @@ export class AppConfig {
       rval = `${this.eventKeyPrefix}event-${Math.round(
         Date.now() / 1000
       )}${suffix}`;
+    }
+    return rval;
+  }
+
+  get eventContentType(): string {
+    let rval = this._eventContentType;
+    if (!rval && !this._eventKey && !this.eventKeySuffix) {
+      rval = 'application/json';
     }
     return rval;
   }
