@@ -27,8 +27,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: nodejs8.10
-      CodeUri: ./dist
-      Handler: EventWriterHandler.handler
+      CodeUri: ./dist/eventWriter.js
+      Handler: eventWriter.handler
       Tracing: Active
       MemorySize: 512
       Timeout: 60
