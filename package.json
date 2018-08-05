@@ -26,6 +26,7 @@
     "aws-sdk": "^2.226.1",
     "del": "^3.0.0",
     "dotenv": "^5.0.1",
+    "git-pre-commit": "^2.1.4",
     "gulp": "^4.0.0",
     "gulp-run-command": "0.0.9",
     "prettier": "^1.14.0",
