@@ -1,6 +1,6 @@
 {
   "name": "aws-serverless-event-writer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A serverless app that receives and stores events to an S3 bucket.",
   "main": "index.js",
   "author": "William Weiss <william@codification.org>",
@@ -18,7 +18,7 @@
     "precommit": "yarn format && yarn lint",
     "build": "yarn clean && yarn package ",
     "deploy": "gulp deploy",
-    "preversion": "yarn lint && yarn test",
+    "preversion": "yarn lint",
     "version": "yarn format && git add -A .",
     "postversion": "git push && git push --tags"
   },
