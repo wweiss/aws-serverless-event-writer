@@ -17,7 +17,13 @@
     "lint": "tslint -p tsconfig.json",
     "precommit": "yarn format && yarn lint",
     "build": "yarn clean && yarn package ",
-    "deploy": "gulp deploy"
+    "deploy": "gulp deploy",
+    "preversion": "yarn lint && yarn test",
+    "version": "yarn format && git add -A .",
+    "postversion": "git push && git push --tags"
+  },
+  "dependencies": {
+    "@codificationorg/commons-core": "^1.0.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.1",
@@ -26,7 +32,6 @@
     "aws-sdk": "^2.226.1",
     "del": "^3.0.0",
     "dotenv": "^5.0.1",
-    "git-pre-commit": "^2.1.4",
     "gulp": "^4.0.0",
     "gulp-run-command": "0.0.9",
     "prettier": "^1.14.0",
