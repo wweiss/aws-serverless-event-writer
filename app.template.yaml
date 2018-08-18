@@ -23,8 +23,15 @@ Parameters:
     Description: (Optional) Expected content type of events to be written.  Used when writing the event to the S3 Bucket.
   LoggingLevel:
     Type: String
-    Default: 'error'
-    Description: (Optional) The level of logging desired (error,warn,info,verbose,debug or silly).
+    Default: error
+    AllowedValues:
+      - error
+      - warn
+      - info
+      - verbose
+      - debug
+      - silly
+    Description: (Optional) The level of logging desired (error, warn, info, verbose, debug or silly).
 
 Resources:
   EventWriter:
