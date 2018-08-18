@@ -21,6 +21,10 @@ Parameters:
     Type: String
     Default: ''
     Description: (Optional) Expected content type of events to be written.  Used when writing the event to the S3 Bucket.
+  LoggingLevel:
+    Type: String
+    Default: 'error'
+    Description: (Optional) The level of logging desired (error,warn,info,verbose,debug or silly).
 
 Resources:
   EventWriter:
@@ -39,9 +43,10 @@ Resources:
           EVENT_KEY_PREFIX: !Ref EventKeyPrefix
           EVENT_KEY_SUFFIX: !Ref EventKeySuffix
           EVENT_CONTENT_TYPE: !Ref EventContentType
+          LOGGING_LEVEL: !Ref LoggingLevel
       Policies:
-          - S3CrudPolicy:
-              BucketName: !Ref S3Bucket
+        - S3CrudPolicy:
+            BucketName: !Ref S3Bucket
 
 Outputs:
   EventWriterFunctionName:
