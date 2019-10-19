@@ -37,7 +37,7 @@ Resources:
   EventWriter:
     Type: AWS::Serverless::Function
     Properties:
-      Runtime: nodejs8.10
+      Runtime: nodejs10.x
       CodeUri: ./dist/eventWriter.js
       Handler: eventWriter.handler
       Tracing: Active
