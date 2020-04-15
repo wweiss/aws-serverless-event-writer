@@ -1,30 +1,23 @@
-const path = require('path');
-const webpack = require('webpack');
-
-const SRC_DIR = path.resolve(__dirname, 'src');
-const OUT_DIR = path.resolve(__dirname, 'dist');
-
-module.exports = (env, argv) => ({
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+const path = require("path");
+const webpackTask = require('@codification/cutwater-build-webpack').webpack;
+const isProduction = webpackTask.buildConfig.production;
+const webpackConfiguration = {
+    mode: isProduction ? 'production' : 'development',
     entry: {
-        eventWriter: path.resolve(SRC_DIR, 'EventWriterHandler.ts'),
-    },
-    externals: [
-        'aws-sdk'
-    ],
-    resolve: {
-        extensions: [".ts", ".js"],
-    },
-    module: {
-        rules: [{
-            test: /\.ts?$/,
-            loader: "ts-loader",
-        }],
+        'eventWriter':  path.join(__dirname, webpackTask.buildConfig.libFolder, 'EventWriterHandler.js')
     },
     output: {
-        path: OUT_DIR,
-        filename: '[name].js',
-        library: '[name]',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        path: path.join(__dirname, webpackTask.buildConfig.distFolder),
+        filename: `[name].js`,
+        sourceMapFilename: "[name].js.map"
     },
+    devtool: "source-map",
+    externals: ['aws-sdk'],
     target: 'node'
-});
+};
+module.exports = webpackConfiguration;

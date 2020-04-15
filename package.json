@@ -6,40 +6,31 @@
   "author": "William Weiss <william@codification.org>",
   "license": "MIT",
   "private": false,
+  "prettier": "@codification/cutwater-build-core/includes/prettier-config",
   "repository": {
     "type": "git",
     "url": "https://github.com/wweiss/aws-serverless-event-writer.git"
   },
   "scripts": {
     "clean": "gulp clean",
-    "package": "gulp package",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
-    "precommit": "yarn format && yarn lint",
-    "build": "yarn clean && yarn package ",
-    "deploy": "gulp deploy",
-    "preversion": "yarn lint",
-    "version": "yarn format && git add -A .",
+    "test": "gulp test --clean",
+    "test-integ": "gulp test-integ --clean",
+    "build": "gulp --clean --production",
+    "package": "yarn build && gulp cloudformation-package",
+    "deploy": "yarn package && gulp cloudformation-deploy",
+    "preversion": "yarn build",
+    "version": "git add -A .",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "@codificationorg/commons-core": "^1.0.0"
+    "@codification/cutwater-logging": "^0.x"
   },
   "devDependencies": {
+    "@codification/cutwater-build-aws": "^0.x",
+    "@codification/cutwater-build-web": "^0.x",
     "@types/aws-lambda": "^8.10.1",
     "@types/node": "^10.0.0",
     "aws-lambda": "^1.0.5",
-    "aws-sdk": "^2.226.1",
-    "del": "^3.0.0",
-    "dotenv": "^5.0.1",
-    "gulp": "^4.0.0",
-    "gulp-run-command": "0.0.9",
-    "prettier": "^1.14.0",
-    "ts-loader": "^4.4.2",
-    "tslint": "^5.9.1",
-    "tslint-config-prettier": "^1.14.0",
-    "typescript": "^2.8.3",
-    "webpack": "^4.16.4",
-    "webpack-cli": "^3.1.0"
+    "aws-sdk": "^2.226.1"
   }
 }

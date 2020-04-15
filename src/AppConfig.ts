@@ -7,20 +7,28 @@ export enum EnvVar {
 }
 
 export class AppConfig {
-  private static valueOrNull(key: string): string {
-    let rval = process.env[key];
-    if (!rval || rval.length < 1) {
-      rval = null;
+  private static requiredValue(key: string, errorMsg?: string): string {
+    const rval = this.valueOrUndefined(key) || '';
+    if (!rval) {
+      throw new Error(errorMsg || `Could not find required config value for key: ${key}`);
     }
     return rval;
   }
 
-  public readonly s3Bucket = process.env[EnvVar.s3Bucket];
+  private static valueOrUndefined(key: string): string | undefined {
+    let rval = process.env[key];
+    if (!rval || rval.length < 1) {
+      rval = undefined;
+    }
+    return rval;
+  }
 
-  private cachedKey = AppConfig.valueOrNull(EnvVar.eventKey);
-  private eventKeyPrefix = AppConfig.valueOrNull(EnvVar.keyPrefix);
-  private eventKeySuffix = AppConfig.valueOrNull(EnvVar.keySuffix);
-  private cachedContentType = AppConfig.valueOrNull(EnvVar.contentType);
+  public readonly s3Bucket = AppConfig.requiredValue(EnvVar.s3Bucket);
+
+  private cachedKey = AppConfig.valueOrUndefined(EnvVar.eventKey);
+  private eventKeyPrefix = AppConfig.valueOrUndefined(EnvVar.keyPrefix);
+  private eventKeySuffix = AppConfig.valueOrUndefined(EnvVar.keySuffix);
+  private cachedContentType = AppConfig.valueOrUndefined(EnvVar.contentType);
 
   get eventKey(): string {
     let rval = this.cachedKey;
@@ -32,7 +40,7 @@ export class AppConfig {
     return rval;
   }
 
-  get eventContentType(): string {
+  get eventContentType(): string | undefined {
     let rval = this.cachedContentType;
     if (!rval && !this.cachedKey && !this.eventKeySuffix) {
       rval = 'application/json';

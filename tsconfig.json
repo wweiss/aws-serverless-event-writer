@@ -1,13 +1,10 @@
 {
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "@codification/cutwater-build-core/includes/tsconfig-node.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "sourceMap": false,
-    "noImplicitAny": false,
-    "module": "commonjs",
-    "declaration": false,
-    "target": "es6",
-    "lib": ["es6", "dom"]
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "src/**/*.spec.ts"]
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "outDir": "lib"
+  }
 }

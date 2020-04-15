@@ -1,4 +1,4 @@
-import { Logger } from '@codificationorg/commons-core';
+import { LoggerFactory } from '@codification/cutwater-logging';
 import { Context } from 'aws-lambda';
 import { S3 } from 'aws-sdk';
 import { PutObjectRequest } from 'aws-sdk/clients/s3';
@@ -6,6 +6,7 @@ import { AppConfig } from './AppConfig';
 
 const s3 = new S3();
 const config = new AppConfig();
+const LOG = LoggerFactory.getLogger();
 
 exports.handler = (event: any, context: Context) => {
   const req: PutObjectRequest = {
@@ -18,9 +19,9 @@ exports.handler = (event: any, context: Context) => {
   }
   s3.putObject(req, (err, data) => {
     if (err) {
-      Logger.error(`Error writting event to S3[${req.Bucket} | ${req.Key}]: `, err);
+      LOG.error(`Error writting event to S3[${req.Bucket} | ${req.Key}]: `, err);
     } else {
-      Logger.info(`Event written to S3[${req.Bucket}]: ${req.Key}`);
+      LOG.info(`Event written to S3[${req.Bucket}]: ${req.Key}`);
     }
   });
 };
