@@ -1,5 +1,0 @@
-{
-    "extends": [
-        "@codification/cutwater-build-core/includes/tslint.json"
-    ]
-  }
