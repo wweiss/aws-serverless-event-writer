@@ -8,7 +8,7 @@ Metadata:
     SpdxLicenseId: MIT
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
-    Labels: ["events", "s3""]
+    Labels: ["events", "s3"]
     HomePageUrl: https://github.com/wweiss/aws-serverless-event-writer
     SemanticVersion: 0.0.1
     SourceCodeUrl: https://github.com/wweiss/aws-serverless-event-writer
