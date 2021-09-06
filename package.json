@@ -1,6 +1,6 @@
 {
   "name": "aws-serverless-event-writer",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A serverless app that receives and stores events to an S3 bucket.",
   "main": "dist/index.js",
   "author": "William Weiss <william@codification.org>",
