@@ -1,6 +1,19 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: EventWriter
+    Description: "A serverless app that receives and stores events to an S3 bucket."
+    Author: William Weiss
+    SpdxLicenseId: MIT
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
+    Labels: ["events", "s3"]
+    HomePageUrl: https://github.com/wweiss/aws-serverless-event-writer
+    SemanticVersion: 0.0.1
+    SourceCodeUrl: https://github.com/wweiss/aws-serverless-event-writer
+
 Parameters:
   S3Bucket:
     Type: String
@@ -38,8 +51,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: nodejs10.x
-      CodeUri: ./dist/eventWriter.js
-      Handler: eventWriter.handler
+      CodeUri: ./dist/index.js
+      Handler: index.handler
       Tracing: Active
       MemorySize: 512
       Timeout: 60

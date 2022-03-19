@@ -3,21 +3,28 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 const path = require("path");
-const webpackTask = require('@codification/cutwater-build-webpack').webpack;
-const isProduction = webpackTask.buildConfig.production;
+const buildConfig = require('@codification/cutwater-build-web').getConfig();
+const isProduction = buildConfig.production;
 const webpackConfiguration = {
     mode: isProduction ? 'production' : 'development',
     entry: {
-        'eventWriter':  path.join(__dirname, webpackTask.buildConfig.libFolder, 'EventWriterHandler.js')
+        'index':  path.join(__dirname, buildConfig.srcFolder, 'EventWriterHandler.js')
     },
     output: {
         libraryTarget: 'umd',
-        path: path.join(__dirname, webpackTask.buildConfig.distFolder),
+        path: path.join(__dirname, buildConfig.distFolder),
         filename: `[name].js`,
         sourceMapFilename: "[name].js.map"
     },
-    devtool: "source-map",
+    resolve: {
+        extensions: ['.ts', '.js'],
+    },
+    devtool: isProduction ? undefined : 'inline-source-map',
+    optimization: {
+        minimize: false,
+    },
+    target: 'node',
     externals: ['aws-sdk'],
-    target: 'node'
+    plugins: [new webpack.IgnorePlugin(/^electron$/)]
 };
 module.exports = webpackConfiguration;
