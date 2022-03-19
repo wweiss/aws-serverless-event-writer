@@ -50,7 +50,7 @@ Resources:
   EventWriter:
     Type: AWS::Serverless::Function
     Properties:
-      Runtime: nodejs10.x
+      Runtime: nodejs14.x
       CodeUri: ./dist/index.js
       Handler: index.handler
       Tracing: Active
